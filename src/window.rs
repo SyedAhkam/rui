@@ -3,7 +3,8 @@ use glutin::{
     event::{Event, WindowEvent},
     event_loop::{ControlFlow, EventLoop},
     window::WindowBuilder,
-    ContextBuilder
+    ContextBuilder,
+    dpi::PhysicalSize
 };
 
 #[pyclass]
@@ -39,6 +40,7 @@ impl Window {
     pub fn run(&self) {
         let event_loop = EventLoop::new();
         let window_builder = WindowBuilder::new()
+            .with_inner_size(PhysicalSize::new(self.width, self.height))
             .with_title(self.title.clone());
 
         let windowed_ctx = ContextBuilder::new()
